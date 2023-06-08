@@ -1,5 +1,6 @@
 streamlit
 openai
+langchain 
 streamlit-chat
 psycopg2
 pymssql
