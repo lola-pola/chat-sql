@@ -38,7 +38,7 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  dnsName: chatter
+  dnsName: chat-sql
   type: LoadBalancer
   port: 80
 
