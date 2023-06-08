@@ -1,0 +1,12 @@
+streamlit
+openai
+streamlit-chat
+psycopg2
+pymssql
+numpy
+pandas
+plotly
+pyodbc
+SQLAlchemy
+scikit-learn
+pmdarima

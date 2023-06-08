@@ -1,2 +1,2 @@
-# chat-sql
-chat-sql
+# chat-with-pdf
+chat-with-pdf

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "chat-sql.fullname" . }}
+  labels:
+    {{- include "chat-sql.labels" . | nindent 4 }}
+  annotations:
+    service.beta.kubernetes.io/azure-dns-label-name: {{ .Values.service.dnsName }}    
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "chat-sql.selectorLabels" . | nindent 4 }}
