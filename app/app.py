@@ -61,15 +61,21 @@ def app():
 
        if mysql_connection_string:
            db = SQLDatabase.from_uri(mysql_connection_string)
-   
+           if checkbox == "mysql":
+              toolkit = SQLDatabaseToolkit(db=db)
+              
+
+              
    
    
            llm = AzureOpenAI(temperature=temperature ,
                            verbose=True,
                            deployment_name=engine,                       
                            max_tokens=max_tokens)
-   
-           db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True,top_k=3)
+           if checkbox == "mysql":
+            agent_executor = create_sql_agent(llm=llm,toolkit=toolkit,verbose=True)
+           else: 
+            db_chain = SQLDatabaseChain.from_llm(llm, db, verbose=True,top_k=3)
    
    
    
@@ -86,7 +92,10 @@ def app():
    
            if user_input:
                print(context + user_input)
-               output=db_chain.run(context + user_input)
+               if checkbox == "mysql":
+                output=agent_executor.run(context + user_input)
+               else:
+                output=db_chain.run(context + user_input)
                st.session_state['past'].append(user_input)
                st.session_state['generated'].append(output)
                if st.session_state['generated']:
