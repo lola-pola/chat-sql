@@ -61,8 +61,7 @@ def app():
 
        if mysql_connection_string:
            db = SQLDatabase.from_uri(mysql_connection_string)
-           if checkbox == "mysql":
-              toolkit = SQLDatabaseToolkit(db=db)
+
               
 
               
@@ -72,6 +71,8 @@ def app():
                            verbose=True,
                            deployment_name=engine,                       
                            max_tokens=max_tokens)
+           if checkbox == "mysql":
+              toolkit = SQLDatabaseToolkit(db=db, llm=llm)
            if checkbox == "mysql":
             agent_executor = create_sql_agent(llm=llm,toolkit=toolkit,verbose=True)
            else: 
